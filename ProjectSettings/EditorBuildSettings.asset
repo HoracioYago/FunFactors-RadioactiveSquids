@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes 3/SquidScene.unity
+    guid: d8f76cb36a7ba43429faf338b437947c
   m_configObjects: {}

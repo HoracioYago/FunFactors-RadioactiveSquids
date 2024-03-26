@@ -127,10 +127,11 @@ public class Ball : MonoBehaviour
         //returnSpot.SetActive(true);
         //returnSpot.GetComponent<Collider>().enabled = true;
         yield return new WaitForSeconds(delay);
-        Debug.Log("Return");
-        transform.position = Vector3.Lerp(transform.position, returnSpot.transform.position, 5f*Time.deltaTime);
+        //Debug.Log("Return");
         gunAudio.clip = reloadAudio;
         gunAudio.Play();
+        transform.position = Vector3.Lerp(transform.position, returnSpot.transform.position, 5f*Time.deltaTime);
+        
         //isReturning = true;
     }
     private IEnumerator ReturnOff(float delay)
