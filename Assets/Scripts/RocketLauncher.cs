@@ -97,7 +97,10 @@ public class RocketLauncher : MonoBehaviour
         isReloading = true;
         animator.SetTrigger("Shot");
         StartCoroutine(Spin(0.2f));
-        
+        yield return new WaitForSeconds(0.5f);
+        gunAudio.clip = shotAudio;
+        gunAudio.Play();
+
         yield return null;
     }
 
@@ -111,8 +114,7 @@ public class RocketLauncher : MonoBehaviour
         atomRodsR.GetComponent<Renderer>().material = regularMaterial;
         atomBall.GetComponent<Renderer>().material = atomizedMaterial;
         cubeAnimator.SetBool("Windup", true);
-        gunAudio.clip = shotAudio;
-        gunAudio.Play();
+        
         StartCoroutine(ShotOut(0.8f));
         Destroy(burst, 3f);
         yield return null;
