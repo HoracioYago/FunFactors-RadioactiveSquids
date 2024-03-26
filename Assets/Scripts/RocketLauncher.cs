@@ -22,9 +22,9 @@ public class RocketLauncher : MonoBehaviour
     [SerializeField] Material regularMaterial, atomizedMaterial;
     [SerializeField] GameObject atomRodsL, atomRodsR, atomBall;
 
-    private AudioSource harpoonAudio;
+    private AudioSource gunAudio;
     public AudioClip shotAudio;
-    public AudioClip reloadAudio;
+    
 
     //private Vector3 cameraForward;
     public static bool isReloading;
@@ -34,6 +34,7 @@ public class RocketLauncher : MonoBehaviour
     void Start()
     {
         regularMaterial = atomBall.GetComponent<Renderer>().material;
+        gunAudio = GetComponent<AudioSource>();
     }
 
 
@@ -53,6 +54,7 @@ public class RocketLauncher : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space) && !isReloading) 
         {
+            
             Debug.Log("SHOT");
             speed = 0;
             camSensitivity = 0;
@@ -64,6 +66,7 @@ public class RocketLauncher : MonoBehaviour
             speed = 5;
             camSensitivity = 60;
             cubeAnimator.SetBool("Windup", false);
+            
             atomRodsL.GetComponent<Renderer>().material = atomizedMaterial;
             atomRodsR.GetComponent<Renderer>().material = atomizedMaterial;
             atomBall.GetComponent<Renderer>().material = regularMaterial;
@@ -94,8 +97,7 @@ public class RocketLauncher : MonoBehaviour
         isReloading = true;
         animator.SetTrigger("Shot");
         StartCoroutine(Spin(0.2f));
-        //harpoonAudio.clip = windupAudio;
-        //harpoonAudio.Play();
+        
         yield return null;
     }
 
@@ -109,6 +111,8 @@ public class RocketLauncher : MonoBehaviour
         atomRodsR.GetComponent<Renderer>().material = regularMaterial;
         atomBall.GetComponent<Renderer>().material = atomizedMaterial;
         cubeAnimator.SetBool("Windup", true);
+        gunAudio.clip = shotAudio;
+        gunAudio.Play();
         StartCoroutine(ShotOut(0.8f));
         Destroy(burst, 3f);
         yield return null;
@@ -119,6 +123,7 @@ public class RocketLauncher : MonoBehaviour
         //rodsIntensity = Mathf.Lerp(0f, -5f, 5f * Time.deltaTime);
         //harpoonAudio.clip = shotAudio;
         //harpoonAudio.Play();
+        
         Ball.isShot = true;
         
     }

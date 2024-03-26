@@ -64,8 +64,8 @@ public class Sea : MonoBehaviour
         {
             
             score += 50;
-            //backBar.SetTrigger("Score");
-            //frontBar.SetTrigger("Score");
+            //backBar.SetTrigger("Scoredd");
+            //frontBar.SetTrigger("Scored");
             scoreBar.SetTrigger("Score");
             ParticleSystem lilSplash = Instantiate(splashParticle, pos, rot);
             Debug.Log(contact);
@@ -76,8 +76,8 @@ public class Sea : MonoBehaviour
         {
             radioactiveSquidCount++;
             score += 200;
-            //backBar.SetTrigger("Score");
-            //frontBar.SetTrigger("Score");
+            //backBar.SetTrigger("Scoredd");
+            //frontBar.SetTrigger("Scored");
             scoreBar.SetTrigger("AtomScore");
             ParticleSystem lilSplash = Instantiate(brightSplashParticle, pos, rot);
             Debug.Log(contact);

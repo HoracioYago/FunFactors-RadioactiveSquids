@@ -19,11 +19,13 @@ public class Ball : MonoBehaviour
     public static int caughtSquid;
     private Vector3 originalPosition;
 
-
+    private AudioSource gunAudio;
+    public AudioClip pulseAudio;
+    public AudioClip reloadAudio;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        gunAudio = player.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -79,15 +81,20 @@ public class Ball : MonoBehaviour
     private IEnumerator Magnetize(float delay)
     {
         yield return new WaitForSeconds(delay);
-
+        gunAudio.clip = pulseAudio;
+        gunAudio.Play();
         isShot = false;
         returnSpot.SetActive(true);
         yield return new WaitForSeconds(1f);
         GameObject stasis = Instantiate(magnetZone, transform.position, Quaternion.identity);
         ParticleSystem atomizer = Instantiate(magnetParticle, transform.position, Quaternion.identity);
+        
         yield return new WaitForSeconds(3f);
+        gunAudio.clip = reloadAudio;
+        gunAudio.Play();
         ParticleSystem warp = Instantiate(gatherPS, returnSpot.transform.position, Quaternion.identity);
         transform.position = returnSpot.transform.position;
+
         Destroy(stasis, 1f);
         Destroy(atomizer, 100f*Time.deltaTime);
         Destroy(warp, 2f);
@@ -122,6 +129,8 @@ public class Ball : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Debug.Log("Return");
         transform.position = Vector3.Lerp(transform.position, returnSpot.transform.position, 5f*Time.deltaTime);
+        gunAudio.clip = reloadAudio;
+        gunAudio.Play();
         //isReturning = true;
     }
     private IEnumerator ReturnOff(float delay)
