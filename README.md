@@ -17,7 +17,7 @@ SPACEBAR / LEFT MOUSE BUTTON - Shoot
 
 Missing:
 
-Splash Sounds
+Splash Sounds / 
 Backtrack Music
 
 (Wasn't sure if this would distract from the gun.)
